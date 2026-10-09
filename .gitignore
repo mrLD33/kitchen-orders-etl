@@ -218,3 +218,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local ETL databases and user-generated outputs
+*.sqlite
+*.sqlite3
+uploads/
+reports/
