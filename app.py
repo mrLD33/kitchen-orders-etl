@@ -106,13 +106,13 @@ with overview_tab:
     st.info("Маржинальность предварительная, по учтённым прямым затратам. Она не является бухгалтерской прибылью. Фактический срок заказа здесь — дата монтажа, поскольку отдельного факта поставки нет.")
     if not orders.empty:
         stages = orders.groupby("current_stage").size().reset_index(name="Количество")
-        st.plotly_chart(px.bar(stages, x="current_stage", y="Количество", labels={"current_stage": "Этап"}, title="Заказы по этапам"), width="stretch")
+        st.plotly_chart(px.bar(stages, x="current_stage", y="Количество", labels={"current_stage": "Этап"}, title="Заказы по этапам"), use_container_width=True, config={"responsive": True})
         late = report.deadlines.loc[report.deadlines.overdue].groupby("stage").size().reset_index(name="Количество")
         if not late.empty:
-            st.plotly_chart(px.bar(late, x="stage", y="Количество", labels={"stage": "Этап"}, title="Просрочки по этапам"), width="stretch")
+            st.plotly_chart(px.bar(late, x="stage", y="Количество", labels={"stage": "Этап"}, title="Просрочки по этапам"), use_container_width=True, config={"responsive": True})
         valid = orders.loc[orders.finance_status == "Полные"]
         if not valid.empty:
-            st.plotly_chart(px.histogram(valid, x="margin_percent", nbins=12, labels={"margin_percent": "Маржинальность, %"}, title="Распределение предварительной маржинальности"), width="stretch")
+            st.plotly_chart(px.histogram(valid, x="margin_percent", nbins=12, labels={"margin_percent": "Маржинальность, %"}, title="Распределение предварительной маржинальности"), use_container_width=True, config={"responsive": True})
 
 with orders_tab:
     st.caption("Фильтры применяются к реестру. Общая аналитика показывает весь загруженный набор.")
